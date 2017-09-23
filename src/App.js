@@ -5,9 +5,21 @@ import './App.css';
 import MercadoLibreAPI from './components/MercadoLibreAPI.js'
 
 class App extends Component {
-  render() {
 
-    var queryItem = '';
+  constructor(props) {
+    super(props)
+    this.state = {
+      queryItem: '',
+    }
+    this.searchItem = this.searchItem.bind(this)
+  }
+
+  searchItem(event) {
+    var nameItem = event.target.value
+    this.setState({queryItem: nameItem})
+  }
+
+  render() {
 
     return (
       <div className="App">
@@ -18,8 +30,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <h1>{queryItem}</h1>
-        <input type="text"></input>
+        <h1>{this.state.queryItem}</h1>
+        <input type='text' onChange={this.searchItem} value={this.state.queryItem}/>
         <MercadoLibreAPI item='tv'></MercadoLibreAPI>
       </div>
     );

@@ -41,8 +41,7 @@ export default class MercadoLibreAPI extends Component {
 
         var items = [];
         this.state.itemsData.forEach(function(product) {
-            items.push(<p>{product.title}</p>)
-            items.push(<br/>)
+            items.push(<p key={product.id}>{product.title}</p>)
         });
 
         return (
