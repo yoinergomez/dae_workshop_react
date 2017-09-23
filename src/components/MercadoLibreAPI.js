@@ -19,13 +19,12 @@ export default class MercadoLibreAPI extends Component {
                 if (!response.ok) {
                     throw Error("Network request failed")
                 }
-
                 return response
             })
             .then(d => d.json())
             .then(d => {
                 this.setState({
-                    itemsData: d
+                    itemsData: d.results
                 })
             }, () => {
                 this.setState({
@@ -39,9 +38,16 @@ export default class MercadoLibreAPI extends Component {
     render() {
         if (this.state.requestFailed) return <p>Failed!</p>
         if (!this.state.itemsData) return <p>Loading...</p>
+
+        var items = [];
+        this.state.itemsData.forEach(function(product) {
+            items.push(<p>{product.title}</p>)
+            items.push(<br/>)
+        });
+
         return (
             <div>
-                <h2>{this.state.itemsData.name}</h2>
+                {items}
             </div>
         )
     }
