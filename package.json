@@ -5,6 +5,8 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-masonry-component": "^5.0.7",
+    "react-masonry-layout": "^0.2.3",
     "react-scripts": "1.0.13"
   },
   "scripts": {
