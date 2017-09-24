@@ -20,7 +20,6 @@ export default class Searcher extends Component {
     }
 
     createAjax() {
-        console.log('Work it!')
         var query    = ReactDOM.findDOMNode(this.refs.query).value;
         var URL      = 'https://api.mercadolibre.com/sites/MCO/search?q=' + query;
         this.props.search(URL)

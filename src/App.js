@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-
-import logo from './logo.svg';
 import './App.css';
 import Searcher from './components/Searcher.js'
+import ProductsItemList from './components/ProductsItemList.js'
+
 
 class App extends Component {
 
@@ -16,8 +16,11 @@ class App extends Component {
     this.search = this.search.bind(this)
   }
 
+  componentWillMount(){
+    this.search('https://api.mercadolibre.com/sites/MCO/search?q=celular');
+  }
+
   search(URL) {
-    console.log(URL)
     fetch(URL)
       .then(response => {
         if (!response.ok) {
@@ -49,17 +52,10 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
+          <Searcher search={this.search}></Searcher>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Searcher search={this.search}></Searcher>
-        <div>
-          {items}
-        </div>
-
+        <ProductsItemList itemsData={this.state.itemsData}></ProductsItemList>
       </div>
     );
   }
