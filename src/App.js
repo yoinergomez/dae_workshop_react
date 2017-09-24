@@ -1,25 +1,50 @@
 import React, { Component } from 'react';
 
+
 import logo from './logo.svg';
 import './App.css';
-import MercadoLibreAPI from './components/MercadoLibreAPI.js'
+import Searcher from './components/Searcher.js'
 
 class App extends Component {
 
   constructor(props) {
     super(props)
+
     this.state = {
-      queryItem: '',
+      itemsData: []
     }
-    this.searchItem = this.searchItem.bind(this)
+    this.search = this.search.bind(this)
   }
 
-  searchItem(event) {
-    var nameItem = event.target.value
-    this.setState({queryItem: nameItem})
+  search(URL) {
+    console.log(URL)
+    fetch(URL)
+      .then(response => {
+        if (!response.ok) {
+          throw Error("Network request failed")
+        }
+        return response
+      })
+      .then(d => d.json())
+      .then(d => {
+        this.setState({
+          itemsData: d.results
+        })
+      }, () => {
+        this.setState({
+          requestFailed: true
+        })
+      })
   }
 
   render() {
+
+    var items = [];
+    this.state.itemsData.forEach(function (product) {
+      items.push(<p key={product.id}>{product.title}</p>)
+    });
+
+
 
     return (
       <div className="App">
@@ -30,9 +55,11 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <h1>{this.state.queryItem}</h1>
-        <input type='text' onChange={this.searchItem} value={this.state.queryItem}/>
-        <MercadoLibreAPI item='tv'></MercadoLibreAPI>
+        <Searcher search={this.search}></Searcher>
+        <div>
+          {items}
+        </div>
+
       </div>
     );
   }
