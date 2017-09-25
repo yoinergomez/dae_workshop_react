@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Searcher from './components/Searcher.js'
 import ProductsItemList from './components/ProductsItemList.js'
-
+import { Jumbotron } from 'react-bootstrap';
 
 class App extends Component {
 
@@ -16,7 +16,7 @@ class App extends Component {
     this.search = this.search.bind(this)
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.search('https://api.mercadolibre.com/sites/MCO/search?q=celular');
   }
 
@@ -47,18 +47,29 @@ class App extends Component {
       items.push(<p key={product.id}>{product.title}</p>)
     });
 
+    var style_jumbo = {
+      'background-color': '#ffdb15',
+    }
 
 
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Welcome to React</h2>
-          <Searcher search={this.search}></Searcher>
+      <div>
+        <div className="header">
+          <Jumbotron style={style_jumbo}>
+            <div className="container">
+              
+              <h1><img src="http://4.bp.blogspot.com/-I5aipg4UF18/UksR7KQHTMI/AAAAAAAAAxg/4624KS9u7rY/s1600/mercadolibrelogo.png"/> <strong>MercadoSearch</strong> <small>@yoinergomez</small></h1>
+              <Searcher search={this.search}></Searcher>
+            </div>
+          </Jumbotron>
         </div>
-        <ProductsItemList itemsData={this.state.itemsData}></ProductsItemList>
+        <div>
+          <ProductsItemList itemsData={this.state.itemsData}></ProductsItemList>
+        </div>
       </div>
     );
   }
+
 }
 
 export default App;

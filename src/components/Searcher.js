@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { FormGroup, FormControl } from 'react-bootstrap';
 
 
 export default class Searcher extends Component {
@@ -13,15 +14,20 @@ export default class Searcher extends Component {
     render() {
         return (
             <div>
-                <input type="text" ref="query" onChange={this.createAjax} />
-                <input type="submit" onClick={this.createAjax} />
+
+                <FormGroup bsSize="large">
+                    <FormControl type="text" ref="query" onChange={this.createAjax} placeholder="I'm shopping for..." />
+                </FormGroup>
+
+                {/* <input type="text" ref="query" onChange={this.createAjax} />
+                <input type="submit" onClick={this.createAjax} /> */}
             </div>
         );
     }
 
     createAjax() {
-        var query    = ReactDOM.findDOMNode(this.refs.query).value;
-        var URL      = 'https://api.mercadolibre.com/sites/MCO/search?q=' + query;
+        var query = ReactDOM.findDOMNode(this.refs.query).value;
+        var URL = 'https://api.mercadolibre.com/sites/MCO/search?q=' + query;
         this.props.search(URL)
     }
 }

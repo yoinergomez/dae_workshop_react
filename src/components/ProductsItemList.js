@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
-import ProductItem from './ProductItem.js'
-import MasonryLayout from 'react-masonry-component'
+import ProductItem from './ProductItem.js';
+import { Grid, Row } from 'react-bootstrap';
 
 
 export default class ProductsItemList extends Component {
 
 
     render() {
-        var style = {
+        /* var style = {
             margin: '6em 3% 19em 3%'
-        };
+        }; */
 
 
         var resultItems = this.props.itemsData.map(function (product) {
             return <ProductItem key={product.id} product={product} />
         });
         return (
-            <MasonryLayout
-                style={style}>
-                    { resultItems }
-            </MasonryLayout>           
+            <Grid>
+                <Row>
+                    {resultItems}
+                </Row>
+            </Grid>
         );
-}
+    }
 
 }
