@@ -2,6 +2,7 @@
   "name": "mercadolibre-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://yoinergomez.github.io/dae_workshop_react",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "react": "^15.6.1",
@@ -10,9 +11,14 @@
     "react-scripts": "1.0.13"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
   }
 }
